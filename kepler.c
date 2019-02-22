@@ -107,7 +107,6 @@ double chi_sq(double H0, double O, double Ok_0, double c, double Th, double rfid
 	for (q = 0; q < 8; q++)
 	{
 		double z1 = z[q];
-		printf("Value of z1 for q value %d is %lf\n", q, z1);
 		double H1 = H0*E(O, z1, Ok_0, O_phi_z[q]);
 		double DM = D_M(H0, Ok_0, rr[q], c, h0, afin);
 		double y = DM / dH;
@@ -197,9 +196,7 @@ void TwoDimDot(double* TwoD, double* OneD, int len, double* result)
 
 double IntegrateFunc(double H0)
 {
-	printf("Inside Integrate Func\n");
 	double chi_sq_result = chi_sq(H0, O, Ok_0, c, Th, rfid, z, O_phi_z, rr, h0, afin, dobs, B_obs, cHobs, Cinv, DM_obs, H_obs);
-	printf("Chi Sq result: %lf\n", chi_sq_result);
 	double final_result = exp((-0.5 * chi_sq_result) + (-1.0 / (2*s*s)) * (H0 - H0_av)*(H0 - H0_av));
 	printf("Final result: %lf\n", final_result);
 	return final_result;
@@ -210,10 +207,7 @@ void SetGlobals(double pO, double pOk_0, double pc, double pTh, double prfid, do
 				double ps, int pz_len, int pO_phi_z_len, int prr_len, int pCinv_len, int pDM_obs_len, int pH_obs_len)
 {
 	int i; 
-	for (i=0; i < 8; i++)
-	{
-		printf("Value of z at %d is %lf\n", i, pz[i]);
-	}
+
 	O = pO;
 	Ok_0 = pOk_0;
 	c = pc;
