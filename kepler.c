@@ -227,12 +227,12 @@ void SetGlobals(double pO, double pOk_0, double pc, double pTh, double prfid, do
 	H0_av = pH0_av;
 	s = ps;
 	
-	z = (double*)malloc(pz_len);
-	O_phi_z = (double*)malloc(pO_phi_z_len);
-	rr = (double*)malloc(prr_len);
-	Cinv = (double*)malloc(pCinv_len);
-	DM_obs = (double*)malloc(pDM_obs_len);
-	H_obs = (double*)malloc(pH_obs_len);
+	z = (double*)malloc(pz_len*sizeof(double));
+	O_phi_z = (double*)malloc(pO_phi_z_len*sizeof(double));
+	rr = (double*)malloc(prr_len*sizeof(double));
+	Cinv = (double*)malloc(pCinv_len*sizeof(double));
+	DM_obs = (double*)malloc(pDM_obs_len*sizeof(double));
+	H_obs = (double*)malloc(pH_obs_len*sizeof(double));
 	
 	memcpy(z, pz, pz_len*sizeof(double));
 	memcpy(O_phi_z, pO_phi_z, pO_phi_z_len*sizeof(double));
