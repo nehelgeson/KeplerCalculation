@@ -202,9 +202,12 @@ double IntegrateFunc(double H0)
 	printf("Chi Sq result: %lf\n", chi_sq_result);
 	double final_result = exp((-0.5 * chi_sq_result) + (-1.0 / (2*s*s)) * (H0 - H0_av)*(H0 - H0_av));
 	printf("Final result: %lf\n", final_result);
+	return final_result;
 }
 
-void SetGlobals(double pO, double pOk_0, double pc, double pTh, double prfid, double* pz, double* pO_phi_z, double* prr, double ph0, double pafin, double pdobs, double pB_obs, double pcHobs, double* pCinv, double* pDM_obs, double* pH_obs, double pH0_av, double ps)
+void SetGlobals(double pO, double pOk_0, double pc, double pTh, double prfid, double* pz, double* pO_phi_z, double* prr, double ph0, 
+				double pafin, double pdobs, double pB_obs, double pcHobs, double* pCinv, double* pDM_obs, double* pH_obs, double pH0_av, 
+				double ps, int pz_len, int pO_phi_z_len, int prr_len, int pCinv_len, int pDM_obs_len, int pH_obs_len)
 {
 	int i; 
 	for (i=0; i < 8; i++)
@@ -216,19 +219,27 @@ void SetGlobals(double pO, double pOk_0, double pc, double pTh, double prfid, do
 	c = pc;
 	Th = pTh;
 	rfid = prfid;
-	z = pz;
-	O_phi_z = pO_phi_z;
-	rr = prr;
 	h0 = ph0;
 	afin = pafin;
 	dobs = pdobs;
 	B_obs = pB_obs;
 	cHobs = pcHobs;
-	Cinv = pCinv;
-	DM_obs = pDM_obs;
-	H_obs = pH_obs;
 	H0_av = pH0_av;
 	s = ps;
+	
+	z = (double*)malloc(pz_len);
+	O_phi_z = (double*)malloc(pO_phi_z_len);
+	rr = (double*)malloc(prr_len);
+	Cinv = (double*)malloc(pCinv_len);
+	DM_obs = (double*)malloc(pDM_obs_len);
+	H_obs = (double*)malloc(pH_obs_len);
+	
+	memcpy(z, pz, pz_len*sizeof(double));
+	memcpy(O_phi_z, pO_phi_z, pO_phi_z_len*sizeof(double));
+	memcpy(rr, prr, prr_len*sizeof(double));
+	memcpy(Cinv, pCinv, pCinv_len*sizeof(double));
+	memcpy(DM_obs, pDM_obs, pDM_obs_len*sizeof(double));
+	memcpy(H_obs, pH_obs, pH_obs_len*sizeof(double));
 }
 
 
