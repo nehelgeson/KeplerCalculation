@@ -107,6 +107,7 @@ double chi_sq(double H0, double O, double Ok_0, double c, double Th, double rfid
 	for (q = 0; q < 8; q++)
 	{
 		double z1 = z[q];
+		printf("Value of z1 for q value %d is %lf\n", q, z1);
 		double H1 = H0*E(O, z1, Ok_0, O_phi_z[q]);
 		double DM = D_M(H0, Ok_0, rr[q], c, h0, afin);
 		double y = DM / dH;
@@ -164,7 +165,8 @@ double chi_sq(double H0, double O, double Ok_0, double c, double Th, double rfid
 	free(DM_th);
 	free(H_th);
 	free(result);
-
+	
+	printf("C: chi2B: %lf, chi2H: %lf, chi2d: %lf\nC: chi_sq_11: %lf, chi2DV1: %lf, chi2DV2: %lf\n", chi2B, chi2H, chi2d, chi_sq_11, chi2DV1, chi2DV2);
 	return chi2B + chi2H + chi2d + chi_sq_11 + chi2DV1 + chi2DV2;
 }
 
@@ -197,12 +199,18 @@ double IntegrateFunc(double H0)
 {
 	printf("Inside Integrate Func\n");
 	double chi_sq_result = chi_sq(H0, O, Ok_0, c, Th, rfid, z, O_phi_z, rr, h0, afin, dobs, B_obs, cHobs, Cinv, DM_obs, H_obs);
-	printf("Result %lf\n", chi_sq_result);
-	return exp((-0.5 * chi_sq_result) + (-1.0 / (2*s*s)) * (H0 - H0_av)*(H0 - H0_av));
+	printf("Chi Sq result: %lf\n", chi_sq_result);
+	double final_result = exp((-0.5 * chi_sq_result) + (-1.0 / (2*s*s)) * (H0 - H0_av)*(H0 - H0_av));
+	printf("Final result: %lf\n", final_result);
 }
 
 void SetGlobals(double pO, double pOk_0, double pc, double pTh, double prfid, double* pz, double* pO_phi_z, double* prr, double ph0, double pafin, double pdobs, double pB_obs, double pcHobs, double* pCinv, double* pDM_obs, double* pH_obs, double pH0_av, double ps)
 {
+	int i; 
+	for (i=0; i < 8; i++)
+	{
+		printf("Value of z at %d is %lf\n", i, pz[i]);
+	}
 	O = pO;
 	Ok_0 = pOk_0;
 	c = pc;
