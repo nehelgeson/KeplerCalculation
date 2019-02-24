@@ -179,9 +179,9 @@ for case in range(1, 3, 1):
         Omegak1 = -K/((sol[d, 2])**2.)
         Omegam = Omegam1/(Omegam1 + Omegaphi1 + Omegak1)
         return Omegam, Omegam1, Omegaphi1, Omegak1
-    for K in arange(-0.45, -0.43, 0.01):  # Big main chunk
+    for K in arange(-0.45, -0.44, 0.01):  # Big main chunk
         print(K)
-        for al in arange(0.4, .45, 0.01):  # Sub-chunk
+        for al in arange(0.4, .41, 0.01):  # Sub-chunk
             print(al)
             k = (8/3)*((al + 4)/(al + 2))*((2/3)*(al*(al + 2)))**(al/2)  # This is kappa, from eq. (2) of arXiv:1307.7399v1.
 

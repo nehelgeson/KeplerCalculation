@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 #define clean_input() while (getchar() != '\n') { }
 
@@ -19,14 +20,11 @@ int main()
 
 	TwoDimDot(test, test2, 3, result);
 
-	printf("%f %f %f", result[0], result[1], result[2]);
+	//printf("%f %f %f", result[0], result[1], result[2]);
 
 	return 0;
 }
 
-/*
-Good to go.
-*/
 void phiCDM(double* results, double* w, double t, double* zz)
 {
 	double p, v, a, al, k, m, K;
@@ -38,15 +36,10 @@ void phiCDM(double* results, double* w, double t, double* zz)
 	m = zz[2];
 	K = zz[3];
 	results[0] = v;
-	//printf("Value: %f\n", ((((4.0 / (9 * a*a*a))) + (1.0 / 12)*(v*v + (k*m) / (pow(p, al))) - K / (a*a))));
 	results[1] = -3 * v*sqrt((((4.0 / (9 * a*a*a))) + (1.0 / 12)*(v*v + (k*m) / (pow(p, al))) - K / (a*a))) + ((k*al*m) / 2) / (pow(p, al + 1));
 	results[2] = sqrt(((4.0 / 9) / a) + (((a*a) / 12))*(v*v + (k*m)*(pow(p, -al))) - K);
-	//printf("%f %f %f\n", results[0], results[1], results[2]);
 }
 
-/*
-IN PROGRESS
-*/
 double rs(double H0, double O, double Th)
 {
 	double h = H0 / 100;
@@ -165,7 +158,7 @@ double chi_sq(double H0, double O, double Ok_0, double c, double Th, double rfid
 	free(H_th);
 	free(result);
 	
-	printf("C: chi2B: %lf, chi2H: %lf, chi2d: %lf\nC: chi_sq_11: %lf, chi2DV1: %lf, chi2DV2: %lf\n", chi2B, chi2H, chi2d, chi_sq_11, chi2DV1, chi2DV2);
+	//printf("C: chi2B: %lf, chi2H: %lf, chi2d: %lf\nC: chi_sq_11: %lf, chi2DV1: %lf, chi2DV2: %lf\n", chi2B, chi2H, chi2d, chi_sq_11, chi2DV1, chi2DV2);
 	return chi2B + chi2H + chi2d + chi_sq_11 + chi2DV1 + chi2DV2;
 }
 
@@ -198,7 +191,7 @@ double IntegrateFunc(double H0)
 {
 	double chi_sq_result = chi_sq(H0, O, Ok_0, c, Th, rfid, z, O_phi_z, rr, h0, afin, dobs, B_obs, cHobs, Cinv, DM_obs, H_obs);
 	double final_result = exp((-0.5 * chi_sq_result) + (-1.0 / (2*s*s)) * (H0 - H0_av)*(H0 - H0_av));
-	printf("Final result: %lf\n", final_result);
+	//printf("Final result: %lf\n", final_result);
 	return final_result;
 }
 
