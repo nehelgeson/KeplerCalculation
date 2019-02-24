@@ -209,7 +209,7 @@ for case in range(1, 3, 1):
         SetGlobals()
 
         test_result = _integrate.IntegrateFunc(ctypes.c_double(2.34), ctypes.c_void_p())
-        print("Test result: %f" % (test_result))
+        #print("Test result: %f" % (test_result))
         
         new_f = LowLevelCallable(_integrate.IntegrateFunc)
         l, error = integrate.quad(new_f, 
