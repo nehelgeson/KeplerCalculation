@@ -3,27 +3,11 @@
 #include <math.h>
 #include <string.h>
 
-#define clean_input() while (getchar() != '\n') { }
-
 double O, Ok_0, c, Th, rfid, *z, *O_phi_z, *rr, h0, afin, dobs, B_obs, cHobs, *Cinv, *DM_obs, *H_obs, H0_av, s; 
 
 void phiCDM(double* results, double* w, double t, double* zz);
 void TwoDimDot(double* TwoD, double* OneD, int len, double* result);
 double OneDimDot(double* first, double* second, int len);
-
-
-int main()
-{
-	double test[3][3] = { {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
-	double test2[3] = { 1, 2, 3 };
-	double result[3];
-
-	TwoDimDot(test, test2, 3, result);
-
-	//printf("%f %f %f", result[0], result[1], result[2]);
-
-	return 0;
-}
 
 void phiCDM(double* results, double* w, double t, double* zz)
 {
