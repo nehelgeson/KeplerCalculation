@@ -214,6 +214,7 @@ for case in range(1, 3, 1):
 
             # solution array
             sol = odeint(phiCDM, w0, t, args=(zz,))
+            sol_col_2 = sol[:int(150 / t0), 2]
             # for H0 in arange(50, 85.1, 0.1):
             for O in arange(0.2, 0.4, 0.01):
                 # start_time = time.time()
@@ -234,29 +235,38 @@ for case in range(1, 3, 1):
                     r = 0
                     qq = 0
                     qt = 0
-                    r1 = []
-                    t1 = []
-                    for d in range(0, b + 1, 1):
-                        if sol[d, 2] / afin >= 1 / (1 + z1):
-                            r += 1 / sol[d, 2]
+                    total = 0.0
+                    trapezoid_prev_d = 0
+                    trapezoid_prev_y = 0
+                    trapezoid_cur_y = 0
+                    z1_bound = 1 / (1 + z1) * afin  # Optimized loop check
+                    first_elem = False
+                    for trapezoid_d in range(0, b + 1, 1):  # Manually calculating trapezoidal sum
+                        if (sol_col_2[trapezoid_d] >= z1_bound):
+                            trapezoid_cur_y = 1 / sol_col_2[trapezoid_d]
+                            r += trapezoid_cur_y
                             qq += 1
                             qt += 1
-                            r1.append(1 / sol[d, 2])
-                            t1.append(d)
+                            if first_elem:
+                                total += ((trapezoid_cur_y + trapezoid_prev_y) / 2) * (trapezoid_d - trapezoid_prev_d)
+                            else:
+                                first_elem = True
+                                trapezoid_prev_d = trapezoid_d
+                            trapezoid_prev_y = trapezoid_cur_y
                         if qq == 1:
-                            Omegaphi_z = (1 / 12) * (((sol[d, 1]) ** 2) + k / ((sol[d, 0]) ** al))
+                            Omegaphi_z = (1 / 12) * (((sol[trapezoid_d, 1]) ** 2) + k / ((sol[trapezoid_d, 0]) ** al))
                     if qt == 1:
                         rr.append(r)
                     else:
-                        rr.append(trapz(r1, t1))
+                        rr.append(total)
                     O_phi_z.append(Omegaphi_z / (Omegam1 + Omegak1 + Omegaphi1))
-
                 alpha0 = 0
                 beta0 = 0
 
                 for q in range(0, len(z_obs), 1):
+                    afin_bound = afin / (1 + z_obs[q])  # Optimized loop check
                     for g in range(0, int(150 / t0), 1):
-                        if sol[g, 2] / afin >= 1 / (1 + z_obs[q]):
+                        if (sol_col_2[g] >= afin_bound):
                             Omegaphi2 = (1 / 12) * (((sol[g, 1]) ** 2) + k / ((sol[g, 0]) ** al))
                             O_phi_z1 = Omegaphi2 / (Omegam1 + Omegak1 + Omegaphi1)
                             break
