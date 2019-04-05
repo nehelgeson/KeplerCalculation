@@ -1,0 +1,13 @@
+Mr. Khadka,
+
+We have completed our optimization of the Kepler script you sent us last Autumn. Our work has led to a massive speedup in the runtime of this code -- utilizing Beocat's multiple cores, you can now complete a full run of this program in XXX hours, as opposed to the XXX it would take with your original code.
+
+You can still run it on your personal computer as well -- we modified the code to take advantage of each of your computer's cores, so running it on your machine will yield a XX speedup, whereas running a 16-core job on Beocat will yield a XX speedup.
+
+We did this by splitting up chunks of parameters into different processes in order to send to different cores. We also made many small, under-the-hood improvements to increase the overall efficiency of your algorithm. All results are identical to those yielded by your original program, and you should be able to maintain your code in the same manner as before with little change to your workflow.
+
+We would be glad to meet with you in person to discuss these changes and answer any questions you may have, just reach out to us to arrange a time. Attached is the fully optimized python file -- you can run it in the same way as before on your personal machine; let us know if you need help getting it running or allocating the correct amount of cores on Beocat.
+
+Cheers,
+Nathan Helgeson
+Creighton Glasscock
