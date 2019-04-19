@@ -195,7 +195,7 @@ for case in range(1, 3, 1):
         subLike = []
 
         K = round(K, 2)
-        for al in arange(0.4, 0.41, 0.01):
+        for al in arange(0.4, 2.0, 0.01):
             al = round(al, 2)
             print(K, al)
             k = (8 / 3) * ((al + 4) / (al + 2)) * ((2 / 3) * (al * (al + 2))) ** (
@@ -283,7 +283,7 @@ for case in range(1, 3, 1):
 
     if __name__ == '__main__':
         pool = multiprocessing.Pool()
-        var_range = arange(-0.45, -0.44, 0.01)
+        var_range = arange(-0.45, 0.46, 0.01)
         result = pool.map(calc_main, var_range) # the set of sublists, already in order
 
         for subO1, suba1, subOk1, subLike in result: # appends each process' sublist to the respective full list
